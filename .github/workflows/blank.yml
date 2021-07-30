@@ -22,7 +22,7 @@ jobs:
           cd inary-develop && sudo make install && cd ..
           sudo ln -s inary-cli /usr/bin/inary || true
           sudo inary ar sulin "https://master.dl.sourceforge.net/project/sulinos/SulinRepository/inary-index.xml" -y -Dchroot  --debug
-          sudo inary ur -y -D$chroot  --debug
+          sudo inary ur sulin -y -Dchroot  --debug
           sudo inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -Dchroot  --debug
           sudo inary it -c system.base curl -y --ignore-configure -Dchroot  --debug
           sudo chroot chroot inary rp busybox  --debug

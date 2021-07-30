@@ -20,7 +20,7 @@ jobs:
           cd inary-develop && sudo python3 setup.py build && cd ..
           cd inary-develop && sudo python3 setup.py install --root=/ --prefix=/usr && cd ..
           sudo ln -s inary-cli /usr/bin/inary || true
-          sulinstrapt chroot -da
+          sudo sulinstrapt chroot -da
           sudo mount --bind /dev chroot/dev
           sudo mount --bind /sys chroot/sys
           sudo mount --bind /proc chroot/proc

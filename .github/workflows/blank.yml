@@ -17,10 +17,10 @@ jobs:
           sudo apt install -yq intltool python3 python3-requests make python3-setuptools
           wget -c "https://gitlab.com/sulinos/devel/inary/-/archive/develop/inary-develop.tar" -O inary.tar
           tar -xf inary.tar
-          cd inary-develop && sudo python3 setup.py build && cd ..
-          cd inary-develop && sudo python3 setup.py install --root=/ --prefix=/usr && cd ..
+          cd inary-develop && sudo make && cd ..
+          cd inary-develop && sudo make install && cd ..
           sudo ln -s inary-cli /usr/bin/inary || true
-          sudo sulinstrapt chroot -da
+          PYTHONPATH=$PYTHONPATH:/usr/lib/sulin/inary sudo sulinstrapt chroot -da
           sudo mount --bind /dev chroot/dev
           sudo mount --bind /sys chroot/sys
           sudo mount --bind /proc chroot/proc

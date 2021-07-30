@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: build
+        run: |
+          sudo apt install -yq intltool python3 python3-requests make python3-setuptools
+          wget -c "https://gitlab.com/sulinos/devel/inary/-/archive/develop/inary-develop.tar" -O inary.tar
+          tar -xf inary.tar
+          cd inary-develop && sudo python3 setup.py build && cd ..
+          cd inary-develop && sudo python3 setup.py install --root=/ --prefix=/usr && cd ..
+          sudo ln -s inary-cli /usr/bin/inary || true
+          sulinstrapt chroot -da
+          sudo mount --bind /dev chroot/dev
+          sudo mount --bind /sys chroot/sys
+          sudo mount --bind /proc chroot/proc
+          sudo mount --bind /run chroot/run
+          sudo git clone $(git remote get-url origin) chroot/build
+          sudo mkdir chroot/output/
+          sudo chroot chroot bash /build/build.sh
+
+      - uses: actions/upload-artifact@v2
+        with:
+            name: output
+            path: chroot/output/*

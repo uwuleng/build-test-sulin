@@ -21,13 +21,13 @@ jobs:
           cd inary-develop && sudo make && cd ..
           cd inary-develop && sudo make install && cd ..
           sudo ln -s inary-cli /usr/bin/inary || true
-          sudo inary ar sulin "https://master.dl.sourceforge.net/project/sulinos/SulinRepository/inary-index.xml" -y -Dchroot
-          sudo inary ur -y -D$chroot
-          sudo inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -Dchroot
-          sudo inary it -c system.base curl -y --ignore-configure -Dchroot
-          sudo chroot chroot inary rp busybox
-          sudo chroot chroot inary rp baselayout
-          sudo chroot chroot inary cp
+          sudo inary ar sulin "https://master.dl.sourceforge.net/project/sulinos/SulinRepository/inary-index.xml" -y -Dchroot  --debug
+          sudo inary ur -y -D$chroot  --debug
+          sudo inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -Dchroot  --debug
+          sudo inary it -c system.base curl -y --ignore-configure -Dchroot  --debug
+          sudo chroot chroot inary rp busybox  --debug
+          sudo chroot chroot inary rp baselayout  --debug
+          sudo chroot chroot inary cp  --debug
           sudo mount --bind /dev chroot/dev
           sudo mount --bind /sys chroot/sys
           sudo mount --bind /proc chroot/proc

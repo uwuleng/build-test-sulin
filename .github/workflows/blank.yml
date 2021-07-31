@@ -21,13 +21,7 @@ jobs:
           cd inary-develop && sudo make && cd ..
           cd inary-develop && sudo make install && cd ..
           sudo ln -s inary-cli /usr/bin/inary || true
-          sudo inary ar sulin "https://osdn.net/frs/redir.php?m=dotsrc&f=storage/g/s/su/sulinos/SulinRepository/inary-index.xml.xz" -y -Dchroot --debug --no-color
-          sudo inary ur sulin -y -Dchroot  --debug --no-color
-          sudo inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -Dchroot  --debug --no-color
-          sudo inary it -c system.base curl -y --ignore-configure -Dchroot  --debug --no-color
-          sudo chroot chroot inary rp busybox  --debug || true
-          sudo chroot chroot inary rp baselayout  --debug || true
-          sudo chroot chroot inary cp  --debug || true
+          sudo sulinstrapt chroot
           sudo mkdir chroot/dev chroot/sys chroot/proc chroot/run
           sudo mount --bind /dev chroot/dev
           sudo mount --bind /sys chroot/sys

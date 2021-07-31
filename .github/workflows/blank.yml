@@ -23,8 +23,8 @@ jobs:
           sudo ln -s inary-cli /usr/bin/inary || true
           sudo inary ar sulin "https://osdn.net/frs/redir.php?m=dotsrc&f=storage/g/s/su/sulinos/SulinRepository/inary-index.xml.xz" -y -Dchroot  --debug
           sudo inary ur sulin -y -Dchroot  --debug
-          sudo inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -Dchroot  --debug
-          sudo inary it -c system.base curl -y --ignore-configure -Dchroot  --debug
+          sudo inary it baselayout --ignore-dep --ignore-safety --ignore-configure -y -Dchroot  --debug --verbose
+          sudo inary it -c system.base curl -y --ignore-configure -Dchroot  --debug --verbose
           sudo chroot chroot inary rp busybox  --debug
           sudo chroot chroot inary rp baselayout  --debug
           sudo chroot chroot inary cp  --debug
@@ -32,6 +32,7 @@ jobs:
           sudo mount --bind /sys chroot/sys
           sudo mount --bind /proc chroot/proc
           sudo mount --bind /run chroot/run
+          sudo chroot chroot inary sc --debug
           sudo git clone $(git remote get-url origin) chroot/build
           sudo mkdir chroot/output/
           sudo chroot chroot bash -ex /build/build.sh

@@ -22,11 +22,6 @@ jobs:
           cd inary-develop && sudo make install && cd ..
           sudo ln -s inary-cli /usr/bin/inary || true
           sudo sulinstrapt chroot
-          sudo mkdir chroot/dev chroot/sys chroot/proc chroot/run
-          sudo mount --bind /dev chroot/dev
-          sudo mount --bind /sys chroot/sys
-          sudo mount --bind /proc chroot/proc
-          sudo mount --bind /run chroot/run
           sudo chroot chroot inary sc --debug
           sudo git clone $(git remote get-url origin) chroot/build
           sudo mkdir chroot/output/
